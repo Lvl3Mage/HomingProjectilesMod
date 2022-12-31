@@ -7,7 +7,7 @@ using CustomList; // Can't get lists to work so this will do for now
 // using Il2CppSystem.Collections.Generic;
 using AoTNetworking.Game.Projectiles;
 using AoTNetworking.Players;
-[assembly: MelonInfo(typeof(HomingProjectilesMod), "HomingProjectiles", "0.4", "Lvl3Mage")]
+[assembly: MelonInfo(typeof(HomingProjectilesMod), "HomingProjectiles", "0.1", "Lvl3Mage")]
 [assembly: MelonGame("RoarkInc", "raot")]
 namespace HomingProjectiles
 {
