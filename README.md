@@ -1,5 +1,5 @@
 # HomingProjectilesMod
-Adds different types of projectile homing to raot. Must be installed on the server.
+Adds different types of projectile homing to raot. Must be installed on the server to work.
 ## Homing Types:
 ### Default
 Triggered by pressing **left-ctrl + left-alt + 0**.
