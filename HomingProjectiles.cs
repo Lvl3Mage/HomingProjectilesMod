@@ -2,19 +2,19 @@ using System;
 using System.Runtime;
 using MelonLoader;
 using UnityEngine;
-using RangedSwordthrows;
+using HomingProjectiles;
 using CustomList; // Can't get lists to work so this will do for now
 // using Il2CppSystem.Collections.Generic;
 using AoTNetworking.Game.Projectiles;
 using AoTNetworking.Players;
-[assembly: MelonInfo(typeof(RangedSwordthrowsMod), "RangedSwordthrows", "0.1", "Lvl3Mage")]
+[assembly: MelonInfo(typeof(HomingProjectilesMod), "HomingProjectiles", "0.4", "Lvl3Mage")]
 [assembly: MelonGame("RoarkInc", "raot")]
-namespace RangedSwordthrows
+namespace HomingProjectiles
 {
-	public class RangedSwordthrowsMod : MelonMod
+	public class HomingProjectilesMod : MelonMod
 	{
 		//This is the optimal solution but dicts ain't working
-		// Dictionary<RangedState,Func<MirrorProjectile, RangedSwordthrowsMod, Projectile>> projectileCreators = new Dictionary<RangedState,Func<MirrorProjectile, RangedSwordthrowsMod, Projectile>>
+		// Dictionary<RangedState,Func<MirrorProjectile, HomingProjectilesMod, Projectile>> projectileCreators = new Dictionary<RangedState,Func<MirrorProjectile, HomingProjectilesMod, Projectile>>
 		// {
 		// 	{RangedState.Ranged, (_projectile, _mod) => new MovingProjectile(_projectile, _mod)},
 		// 	{RangedState.Homing, (_projectile, _mod) => new HomingProjectile(_projectile, _mod)},
@@ -145,10 +145,10 @@ namespace RangedSwordthrows
 
 	public abstract class Projectile // The base class for all projectiles to inherit from
 	{
-		protected RangedSwordthrowsMod mod;
+		protected HomingProjectilesMod mod;
 		public readonly MirrorProjectile projectile;
 		protected Transform transform;
-		public Projectile(MirrorProjectile _projectile, RangedSwordthrowsMod _mod){
+		public Projectile(MirrorProjectile _projectile, HomingProjectilesMod _mod){
 			mod = _mod;
 			projectile = _projectile;
 			transform = projectile.gameObject.transform;
@@ -161,7 +161,7 @@ namespace RangedSwordthrows
 		float lifetime = 0;
 		const float speed = 200;
 		Vector3 startPosition, movementDirection;
-		public MovingProjectile(MirrorProjectile _projectile, RangedSwordthrowsMod _mod) : base(_projectile, _mod)
+		public MovingProjectile(MirrorProjectile _projectile, HomingProjectilesMod _mod) : base(_projectile, _mod)
 		{
 			startPosition = transform.position;
 		}
@@ -181,7 +181,7 @@ namespace RangedSwordthrows
 		Quaternion prevRotation;
 		const float speed = 50;
 		const float rotationSpeed = 100f;
-		public HomingProjectile(MirrorProjectile _projectile, RangedSwordthrowsMod _mod) : base(_projectile, _mod)
+		public HomingProjectile(MirrorProjectile _projectile, HomingProjectilesMod _mod) : base(_projectile, _mod)
 		{
 			prevPosition = transform.position;
 			prevRotation = transform.rotation;
@@ -217,7 +217,7 @@ namespace RangedSwordthrows
 		const float speed = 500;
 		Transform lockedTarget = null;
 		Vector3 movementDirection, currentPosition;
-		public RangedHomingProjectile(MirrorProjectile _projectile, RangedSwordthrowsMod _mod) : base(_projectile, _mod)
+		public RangedHomingProjectile(MirrorProjectile _projectile, HomingProjectilesMod _mod) : base(_projectile, _mod)
 		{
 			currentPosition = transform.position;
 		}
@@ -287,7 +287,7 @@ namespace RangedSwordthrows
 	{
 		const float limitAngle = 10;
 		Transform lockedTarget = null;
-		public HitscanProjectile(MirrorProjectile _projectile, RangedSwordthrowsMod _mod) : base(_projectile, _mod)
+		public HitscanProjectile(MirrorProjectile _projectile, HomingProjectilesMod _mod) : base(_projectile, _mod)
 		{
 		}
 		MirrorNetworkedPlayer FindClosestPlayer(MirrorNetworkedPlayer[] players){
@@ -346,7 +346,7 @@ namespace RangedSwordthrows
 		MirrorNetworkedPlayer originalNetworkedPlayer;
 		Vector3 currentPosition;
 		bool snapped = false;
-		public WiredProjectile(MirrorProjectile _projectile, RangedSwordthrowsMod _mod) : base(_projectile, _mod)
+		public WiredProjectile(MirrorProjectile _projectile, HomingProjectilesMod _mod) : base(_projectile, _mod)
 		{
 			currentPosition = transform.position;
 			originalNetworkedPlayer = FindClosestPlayer(mod.GetPlayers());
@@ -430,7 +430,7 @@ namespace RangedSwordthrows
 		MirrorNetworkedPlayer originalNetworkedPlayer;
 		Vector3 currentPosition;
 		bool snapped = false;
-		public LaserGuidedProjectile(MirrorProjectile _projectile, RangedSwordthrowsMod _mod) : base(_projectile, _mod)
+		public LaserGuidedProjectile(MirrorProjectile _projectile, HomingProjectilesMod _mod) : base(_projectile, _mod)
 		{
 			currentPosition = transform.position;
 			originalNetworkedPlayer = FindClosestPlayer(mod.GetPlayers());
